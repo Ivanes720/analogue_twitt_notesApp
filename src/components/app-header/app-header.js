@@ -21,7 +21,7 @@ const AppHeader=({liked, allPosts})=>{
     return (
         <Header >
 <h1>Ivan Naroha</h1>
-<h2>{allPosts}zapisey, iz nich ponravilos {liked}</h2>
+<h2>{allPosts} записей, понравилось {liked}</h2>
         </Header>
     )
 }

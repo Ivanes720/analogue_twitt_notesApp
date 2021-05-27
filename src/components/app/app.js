@@ -29,6 +29,7 @@ export default class App extends Component {
         this.onToogleLiked=  this.onToogleLiked.bind(this);
         this.onUpdateSearh=  this.onUpdateSearh.bind(this);
         this.onFilterSelect=  this.onFilterSelect.bind(this);
+        this.toogleLikeOrImportant=  this.toogleLikeOrImportant.bind(this);
 
         this.maxId = 4;
     }
@@ -61,29 +62,29 @@ export default class App extends Component {
             }
         });
     }
-    onToogleImportant (id){
+
+    toogleLikeOrImportant (id, item) {
         this.setState(({data})=>{
-            const index =data.findIndex(elem=>elem.id ===id);
-            const old =data[index];
-            const newItem={...old, important: !old.important};
-            const newArr= [...data.slice(0, index), newItem, ... data.slice(index + 1)]
-                 return {
-                     data: newArr
-                 }
-                  })
+       const index =data.findIndex(elem=>elem.id ===id);
+       const old =data[index];
+       const newItem={...old, [item]: !old[item]};
+       const newArr= [...data.slice(0, index), newItem, ... data.slice(index + 1)]
+            return {
+                data: newArr
+            }
+             })
+           }
+    onToogleImportant (id){
+        this.toogleLikeOrImportant(id, 'important')
     }
 
     onToogleLiked (id) {
- this.setState(({data})=>{
-const index =data.findIndex(elem=>elem.id ===id);
-const old =data[index];
-const newItem={...old, like: !old.like};
-const newArr= [...data.slice(0, index), newItem, ... data.slice(index + 1)]
-     return {
-         data: newArr
-     }
-      })
+ this.toogleLikeOrImportant(id, 'like')
     }
+
+
+
+    
     searhPost(items, term){
 if(term.length === 0){
     return items
